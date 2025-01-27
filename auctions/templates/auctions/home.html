@@ -1,0 +1,126 @@
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Благодійний аукціон</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'auctions/css/main.css' %}" rel="stylesheet">
+</head>
+<body class="main-bg">
+    <!-- Навігаційна панель -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand accent-color" href="#">
+                <img src="{% static 'auctions/img/logo.png' %}" alt="Logo" height="30">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link accent-color" href="#">Головна</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link accent-color" href="#">Про нас</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link accent-color" href="#">Мої аукціони</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link accent-color" href="#">Адмін панель</a>
+                    </li>
+                    <li class="nav-item">
+                        <span class="nav-link disabled">|</span>
+                    </li>
+                    <!-- Якщо не залоговано -->
+                    <li class="nav-item">
+                        <a class="nav-link accent-color" href="#">Зареєструватися</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link accent-color" href="#">Увійти</a>
+                    </li>
+                    <!-- Якщо залоговано -->
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link accent-color" href="#">Мій профіль</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link accent-color" href="#">Вийти</a>
+                    </li>
+                    -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основний контент -->
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Сайдбар сортування -->
+            <div class="col-lg-3 col-md-4 sidebar">
+                <h5 class="mb-3 accent-color">Сортування лотів</h5>
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action accent-color">За датою додавання</a>
+                    <a href="#" class="list-group-item list-group-item-action accent-color">За завершенням</a>
+                    <a href="#" class="list-group-item list-group-item-action accent-color">За ціною</a>
+                    <a href="#" class="list-group-item list-group-item-action accent-color">За популярністю</a>
+                </div>
+            </div>
+
+            <!-- Список лотів -->
+            <div class="col-lg-9 col-md-8">
+                <div class="row">
+                    <!-- Приклад лоту -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card lot-card">
+                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Лот">
+                            <div class="card-body">
+                                <h5 class="card-title accent-color">Назва лоту</h5>
+                                <p class="card-text">Опис лоту...</p>
+                                <a href="#" class="btn btn-primary">Детальніше</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Повторити інші лоти -->
+                    <!-- Додаткові лоти для демонстрації -->
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card lot-card">
+                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Лот">
+                            <div class="card-body">
+                                <h5 class="card-title accent-color">Назва лоту 2</h5>
+                                <p class="card-text">Опис лоту...</p>
+                                <a href="#" class="btn btn-primary">Детальніше</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-md-6">
+                        <div class="card lot-card">
+                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Лот">
+                            <div class="card-body">
+                                <h5 class="card-title accent-color">Назва лоту 3</h5>
+                                <p class="card-text">Опис лоту...</p>
+                                <a href="#" class="btn btn-primary">Детальніше</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container text-center">
+            <span class="text-muted">Powered by Django</span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
