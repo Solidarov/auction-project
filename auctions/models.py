@@ -30,3 +30,13 @@ class AuctionModel(models.Model):
     
     def __str__(self):
         return self.title
+    
+
+class AuctionImageModel(models.Model):
+    auction = models.ForeignKey(AuctionModel, on_delete=models.CASCADE,
+                                verbose_name='Лот')
+    image = models.ImageField(upload_to='auction_pics_main', verbose_name='Фото лоту')
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Image for {self.auction.title}'
