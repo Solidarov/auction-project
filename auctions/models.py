@@ -40,17 +40,22 @@ def auction_image_path(instance, filename):
 
 class AuctionImageModel(models.Model):
     auction = models.ForeignKey(AuctionModel, on_delete=models.CASCADE,
-                                verbose_name='Лот')
+                                verbose_name='Лот',
+                                related_name='images',)
     image = models.ImageField(upload_to=auction_image_path, 
                               verbose_name='Фото лоту')
     added_at = models.DateTimeField(auto_now_add=True)
 
-    def get_thumbnail_path(self):
+    def get_thumbnail_path(self, relative=True):
         """
         Get path to created thumbnail for this image.
         """
-        original_path = self.image.path
+        if relative:
+            original_path = self.image.url
+        else:
+            original_path = self.image.path
         return original_path.replace('original', 'thumbnails')
+        
 
     def __str__(self):
         return f'Image for {self.auction.title}'

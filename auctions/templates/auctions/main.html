@@ -1,0 +1,67 @@
+{% extends 'auctions/home.html' %}
+
+{%block content%}
+    <!-- Sorting Sidebar -->
+    <div class="col-lg-3 col-md-4 sidebar">
+        <h5 class="mb-3 accent-color">Сортування лотів</h5>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action accent-color">За датою додавання</a>
+            <a href="#" class="list-group-item list-group-item-action accent-color">За завершенням</a>
+            <a href="#" class="list-group-item list-group-item-action accent-color">За ціною</a>
+            <a href="#" class="list-group-item list-group-item-action accent-color">За популярністю</a>
+        </div>
+    </div>
+
+    <!-- List of Auctions -->
+    <div class="col-lg-9 col-md-8">
+        <div class="row">
+
+            {% for auction in auctions %}
+                <div class="col-xl-4 col-md-6">
+                    <div class="card lot-card">
+
+                        {% if auction.images.all %}
+                        <!-- Image Carousel -->
+                        <div id="carousel-{{ auction.id }}" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+                            <div class="carousel-inner">
+
+                                {% for image in auction.images.all %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ image.get_thumbnail_path }}" class="d-block w-100" alt="Лот">
+                                    </div>
+                                {% endfor %}
+                            
+                            </div>
+
+                            <!-- Carousel controls -->
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ auction.id }}" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ auction.id }}" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+
+                    {% else %}
+                        <!-- Placeholder if no images are available -->
+                        <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Лот">
+                    {% endif %}
+
+                        <div class="card-body">
+                            <small class="card-text text-muted" >{{auction.start_time}} </small><br><br>
+                            <h5 class="card-title accent-color">{{auction.title}}</h5>
+                            <h6 class="card-title">Поточна ставка: {{auction.start_price}} грн</h6>
+                            <p class="card-text">{{ auction.description| truncatewords:15 }}</p>
+                            <a href="#" class="btn btn-primary">Зробити ставку</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+
+{% endblock %}

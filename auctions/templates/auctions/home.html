@@ -60,57 +60,7 @@
     <!-- Основний контент -->
     <div class="container mt-4">
         <div class="row">
-            <!-- Сайдбар сортування -->
-            <div class="col-lg-3 col-md-4 sidebar">
-                <h5 class="mb-3 accent-color">Сортування лотів</h5>
-                <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action accent-color">За датою додавання</a>
-                    <a href="#" class="list-group-item list-group-item-action accent-color">За завершенням</a>
-                    <a href="#" class="list-group-item list-group-item-action accent-color">За ціною</a>
-                    <a href="#" class="list-group-item list-group-item-action accent-color">За популярністю</a>
-                </div>
-            </div>
-
-            <!-- Список лотів -->
-            <div class="col-lg-9 col-md-8">
-                <div class="row">
-                    <!-- Приклад лоту -->
-                    <div class="col-xl-4 col-md-6">
-                        <div class="card lot-card">
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Лот">
-                            <div class="card-body">
-                                <h5 class="card-title accent-color">Назва лоту</h5>
-                                <p class="card-text">Опис лоту...</p>
-                                <a href="#" class="btn btn-primary">Детальніше</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Повторити інші лоти -->
-                    <!-- Додаткові лоти для демонстрації -->
-                    <div class="col-xl-4 col-md-6">
-                        <div class="card lot-card">
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Лот">
-                            <div class="card-body">
-                                <h5 class="card-title accent-color">Назва лоту 2</h5>
-                                <p class="card-text">Опис лоту...</p>
-                                <a href="#" class="btn btn-primary">Детальніше</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-4 col-md-6">
-                        <div class="card lot-card">
-                            <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Лот">
-                            <div class="card-body">
-                                <h5 class="card-title accent-color">Назва лоту 3</h5>
-                                <p class="card-text">Опис лоту...</p>
-                                <a href="#" class="btn btn-primary">Детальніше</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% block content %}{%endblock%}
         </div>
     </div>
 

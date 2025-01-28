@@ -34,7 +34,7 @@ def delete_image_file(sender, instance, **kwargs):
     Fistly, delete thumbnail, then delete original image.
     """
 
-    thumbnail_path = instance.get_thumbnail_path()
+    thumbnail_path = instance.get_thumbnail_path(relative=False)
     if thumbnail_path and os.path.exists(thumbnail_path):
         os.remove(thumbnail_path)
 
