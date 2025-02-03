@@ -43,7 +43,8 @@ class AuctionImageModel(models.Model):
                                 verbose_name='Лот',
                                 related_name='images',)
     image = models.ImageField(upload_to=auction_image_path, 
-                              verbose_name='Фото лоту')
+                              verbose_name='Фото лоту',
+                              default='auction_pics/default/original/default.png')
     added_at = models.DateTimeField(auto_now_add=True)
 
     def get_thumbnail_path(self, relative=True):

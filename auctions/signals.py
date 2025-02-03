@@ -34,6 +34,9 @@ def delete_image_file(sender, instance, **kwargs):
     Fistly, delete thumbnail, then delete original image.
     """
 
+    if instance.image.name == 'auction_pics/default/original/default.png':
+        return
+
     thumbnail_path = instance.get_thumbnail_path(relative=False)
     if thumbnail_path and os.path.exists(thumbnail_path):
         os.remove(thumbnail_path)
