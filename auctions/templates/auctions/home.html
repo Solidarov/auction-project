@@ -8,12 +8,13 @@
     <title>Благодійний аукціон</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{% static 'auctions/css/main.css' %}" rel="stylesheet">
+    {%block links%}{%endblock%}
 </head>
 <body class="main-bg">
     <!-- Навігаційна панель -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand accent-color" href="#">
+            <a class="navbar-brand accent-color" href="{% url 'home' %}">
                 <img src="{% static 'auctions/img/logo.png' %}" alt="Logo" height="30">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -22,7 +23,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link accent-color" href="#">Головна</a>
+                        <a class="nav-link accent-color" href="{% url 'home' %}">Головна</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link accent-color" href="#">Про нас</a>
