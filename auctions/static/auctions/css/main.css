@@ -1,0 +1,23 @@
+.main-bg {
+    background-color: white;
+}
+.accent-color {
+    color: #0066cc !important;
+}
+.footer {
+    background-color: #f8f9fa;
+    height: 100px;
+    margin-top: 2rem;
+    padding: 2rem 0;
+}
+.lot-card {
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s;
+}
+.lot-card:hover {
+    transform: translateY(-5px);
+}
+.sidebar {
+    border-right: 1px solid #dee2e6;
+    height: calc(100vh - 150px);
+}
