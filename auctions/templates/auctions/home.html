@@ -31,27 +31,26 @@
                         <a class="nav-link accent-color" href="#">Мої аукціони</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link accent-color" href="#">Адмін панель</a>
+                        <a class="nav-link accent-color" href="{% url 'admin:index' %}">Адмін панель</a>
                     </li>
                     <li class="nav-item">
                         <span class="nav-link disabled">|</span>
                     </li>
-                    <!-- Якщо не залоговано -->
-                    <li class="nav-item">
-                        <a class="nav-link accent-color" href="#">Зареєструватися</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link accent-color" href="#">Увійти</a>
-                    </li>
-                    <!-- Якщо залоговано -->
-                    <!--
-                    <li class="nav-item">
-                        <a class="nav-link accent-color" href="#">Мій профіль</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link accent-color" href="#">Вийти</a>
-                    </li>
-                    -->
+                    {% if not user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link accent-color" href="#">Зареєструватися</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link accent-color" href="#">Увійти</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link accent-color" href="#">Мій профіль</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link accent-color" href="#">Вийти</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
