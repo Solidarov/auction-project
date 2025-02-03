@@ -12,4 +12,4 @@ class AuctionListView(ListView):
     ordering = ['-start_time']
 
     def get_queryset(self):
-        return AuctionModel.objects.prefetch_related('images')
+        return AuctionModel.objects.filter(status = 'active').prefetch_related('images')
