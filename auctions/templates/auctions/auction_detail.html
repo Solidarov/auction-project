@@ -1,0 +1,85 @@
+{% extends 'auctions/home.html' %}
+{% load auction_extras %}
+{% load static %}
+
+{%block links%} 
+    <link href="{% static 'auctions/css/auction_detail.css' %}" rel="stylesheet">
+{%endblock%}
+
+{% block content %}
+    <div class="row">
+        <!-- Ліва частина: Зображення та опис -->
+        <div class="col-md-8">
+            <div class="card">
+
+                {% if auction.images.all %}
+                    <!-- Image Carousel -->
+                    <div id="carousel" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
+                        <div class="carousel-inner">
+
+                            {% for image in auction.images.all %}
+                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                    <img src="{{ image.image.url }}" class="d-block w-100" alt="Лот">
+                                </div>
+                            {% endfor %}
+                        
+                        </div>
+
+                        <!-- Carousel controls -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                {% endif %}
+
+                <div class="card-body">
+                    <h1 class="card-title">{{ auction.title }}</h1>
+                    <hr>
+                    <h3>Опис</h3> 
+                    <p id="description-auction-detail" class="card-text">{{ auction.description }}</p>
+                    <hr>
+                    <h3>Історія ставок</h3>
+                    <p>Скоро з'явиться</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Права частина: Інформація про аукціон -->
+        <div class="col-md-4">
+            <div class="sticky-top" style="top: 20px;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Інформація про аукціон</h5>
+                        <p><strong>Продавець:</strong> {{ auction.user }}</p>
+                        <p><strong>Початок:</strong> {{ auction.start_time }}</p>
+                        <p><strong>Кінець:</strong> {{ auction.start_time }}</p>
+                        <p><strong>Актуальна ціна:</strong> {{ auction.start_price| get_price }} грн</p>
+
+                        {% if user.is_authenticated %}
+                            <form method="POST" action="#">
+
+                                {% csrf_token %}
+                                
+                                <div class="mb-3">
+                                    <input type="number" name="bid_amount" class="form-control" placeholder="Ваша ставка" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Зробити ставку</button>
+                            </form>
+
+                        {% else %}
+                            <p class="text-danger">Щоб зробити ставку, будь ласка, <a href="#">увійдіть</a>.</p>
+                        
+                        {% endif %}
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
