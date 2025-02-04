@@ -1,6 +1,8 @@
-from django.db.models.signals import post_delete, post_save
+from django.db.models.signals import (post_delete, 
+                                      post_save)
 from django.dispatch import receiver
-from auctions.models import AuctionImageModel
+from auctions.models import (AuctionImageModel, 
+                             AuctionModel)
 from PIL import Image
 
 import os
@@ -43,3 +45,14 @@ def delete_image_file(sender, instance, **kwargs):
 
     if instance.image and instance.image.storage.exists(instance.image.name):
         instance.image.delete(save=False)
+
+
+# Signals for 'AuctionModel' model
+@receiver(post_save, sender=AuctionModel)
+def add_default_imgage(sender, instance, created, **kwargs):
+    """
+    Add default image for auction when it is created
+    without any images.
+    """
+    if not instance.images.all():
+        AuctionImageModel.objects.create(auction=instance)
