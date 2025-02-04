@@ -21,7 +21,9 @@ class AuctionModel(models.Model):
     title = models.CharField(max_length=200, verbose_name='Назва лоту')
     description = models.TextField(max_length=10000, verbose_name='Опис лоту')
     #two last zeros are for cents
-    start_price = models.PositiveBigIntegerField(verbose_name='Стартова ціна лоту') 
+    start_price = models.DecimalField(max_digits=12,
+                                      decimal_places=2, 
+                                      verbose_name='Стартова ціна лоту') 
     start_time = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=30, 
                               choices=STATUS_CHOICES, 
