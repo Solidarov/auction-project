@@ -3,6 +3,8 @@ from django.db.models.signals import (post_delete,
 from django.dispatch import receiver
 from auctions.models import (AuctionImageModel, 
                              AuctionModel)
+from main.settings import MEDIA_ROOT
+import shutil
 from PIL import Image
 
 import os
@@ -56,3 +58,13 @@ def add_default_imgage(sender, instance, created, **kwargs):
     """
     if not instance.images.all():
         AuctionImageModel.objects.create(auction=instance)
+
+
+@receiver(post_delete, sender=AuctionModel)
+def delete_images_folder(sender, instance, **kwargs):
+    """
+    Delete image folder of auction when it is deleted.
+    """
+    dir_path = os.path.join(MEDIA_ROOT, f'auction_pics/{instance.id}')
+    if dir_path and os.path.exists(dir_path):
+        shutil.rmtree(dir_path)
