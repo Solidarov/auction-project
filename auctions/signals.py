@@ -56,7 +56,7 @@ def add_default_imgage(sender, instance, created, **kwargs):
     Add default image for auction when it is created
     without any images.
     """
-    if not instance.images.all():
+    if not created and not instance.images.all():
         AuctionImageModel.objects.create(auction=instance)
 
 

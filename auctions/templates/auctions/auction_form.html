@@ -1,0 +1,163 @@
+{% extends 'auctions/home.html' %}
+{% load static %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <!-- Ліва частина: Зображення та опис -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">Створення нового лоту</h1>
+                    <hr>
+                        <!-- Image upload section -->
+                        <div class="mb-3">
+                            <label for="images" class="form-label">Зображення лоту</label>
+                            <input type="file" 
+                                class="form-control" 
+                                id="images" 
+                                name="images" 
+                                multiple 
+                                accept="image/*"
+                                data-max-files="5">
+                            <div class="form-text">Дозволено завантажити до 5 зображень</div>
+                        </div>
+                    
+                        <!-- Preview container -->
+                        <div id="preview-container" class="mb-4">
+                            <div id="image-preview" class="row g-2">
+                                <!-- Previews will be inserted here -->
+                            </div>
+                        </div>
+                        
+                        <hr>
+                        
+                        <!-- Форма для опису -->
+                        <h3>Опис лоту</h3>
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Назва</label>
+                            <input type="text" class="form-control" id="title" name="title" maxlength="200" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Детальний опис</label>
+                            <textarea class="form-control" id="description" name="description" rows="10" maxlength="10000" required></textarea>
+                        </div>
+                </div>
+            </div>
+        </div>
+            
+
+        <!-- Права частина: Налаштування аукціону -->
+        <div class="col-md-4">
+            <div class="sticky-top" style="top: 20px;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Налаштування аукціону</h5>
+                        
+                        <div class="mb-3">
+                            <label for="start_price" class="form-label">Стартова ціна (грн)</label>
+                            <input type="number" class="form-control" id="start_price" name="start_price" step="0.01" required>
+                        </div>
+                        
+                        
+                        <button type="submit" class="btn btn-primary w-100">Опублікувати лот</button>
+                        
+                        <div class="mt-3">
+                            <p class="text-muted small">
+                                Публікуючи лот, ви погоджуєтесь з правилами аукціону та 
+                                зобов'язуєтесь передати лот переможцю торгів.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--JavaScript script for images-->
+<script>
+    const imageInput = document.getElementById('images');
+    const previewContainer = document.getElementById('image-preview');
+    const maxFiles = 5;
+
+    imageInput.addEventListener('change', function(e) {
+        const files = Array.from(e.target.files);
+
+        // Validate number of files
+        if (files.length > maxFiles) {
+            alert(`Максимальна кількість файлів: ${maxFiles}`);
+            imageInput.value = '';
+            return;
+        }
+
+        // Clear preview
+        previewContainer.innerHTML = '';
+
+        files.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const col = document.createElement('div');
+                col.className = 'col-6 col-md-4 col-lg-3';
+                
+                col.innerHTML = `
+                    <div class="card h-100 position-relative">
+                        <img src="${e.target.result}" 
+                             class="card-img-top" 
+                             style="height: 200px; object-fit: cover;">
+                        <button type="button" 
+                                class="btn-close position-absolute top-0 end-0 m-2 bg-white" 
+                                aria-label="Close"></button>
+                    </div>
+                `;
+
+                col.querySelector('.btn-close').onclick = () => {
+                    col.remove();
+                    if (previewContainer.children.length === 0) {
+                        imageInput.value = '';
+                    }
+                };
+
+                previewContainer.appendChild(col);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+</script>
+
+<!--JavaScript for counting chars in fields-->
+<script>
+    // Find elements
+    const titleInput = document.getElementById('title');
+    const descriptionInput = document.getElementById('description');
+
+    // Add counter spans
+    titleInput.insertAdjacentHTML('afterend',
+        '<div class="form-text"> <span id="titleCounter">0</span>/200</div>'
+    );
+    
+    descriptionInput.insertAdjacentHTML('afterend',
+        '<div class="form-text"> <span id="descriptionCounter">0</span>/10000</div>'
+    );
+
+    // Update function
+    function updateCounter(element, counterId) {
+        const counter = document.getElementById(counterId);
+        counter.textContent = element.value.length;
+    }
+
+    // Add listeners
+    titleInput.addEventListener('input', () => 
+        updateCounter(titleInput, 'titleCounter')
+    );
+    
+    descriptionInput.addEventListener('input', () => 
+        updateCounter(descriptionInput, 'descriptionCounter')
+    );
+
+    // Initial count
+    updateCounter(titleInput, 'titleCounter');
+    updateCounter(descriptionInput, 'descriptionCounter');
+</script>
+{% endblock %}

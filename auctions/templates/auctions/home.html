@@ -29,9 +29,6 @@
                         <a class="nav-link accent-color" href="#">Про нас</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link accent-color" href="#">Мої аукціони</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link accent-color" href="{% url 'admin:index' %}">Адмін панель</a>
                     </li>
                     <li class="nav-item">
@@ -45,6 +42,12 @@
                             <a class="nav-link accent-color" href="#">Увійти</a>
                         </li>
                     {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link accent-color" href="{% url 'auction_create' %}">Створити аукціон</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link accent-color" href="#">Мої аукціони</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link accent-color" href="#">Мій профіль</a>
                         </li>
