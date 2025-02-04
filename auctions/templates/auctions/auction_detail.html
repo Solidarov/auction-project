@@ -1,5 +1,4 @@
 {% extends 'auctions/home.html' %}
-{% load auction_extras %}
 {% load static %}
 
 {%block links%} 
@@ -59,7 +58,7 @@
                         <p><strong>Продавець:</strong> {{ auction.user }}</p>
                         <p><strong>Початок:</strong> {{ auction.start_time }}</p>
                         <p><strong>Кінець:</strong> {{ auction.start_time }}</p>
-                        <p><strong>Актуальна ціна:</strong> {{ auction.start_price| get_price }} грн</p>
+                        <p><strong>Актуальна ціна:</strong> {{ auction.start_price }} грн</p>
 
                         {% if user.is_authenticated %}
                             <form method="POST" action="#">

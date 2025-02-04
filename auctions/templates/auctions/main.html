@@ -1,7 +1,5 @@
 {% extends 'auctions/home.html' %}
 
-{% load auction_extras %}
-
 {%block content%}
     <!-- Sorting Sidebar -->
     <div class="col-lg-3 col-md-4 sidebar">
@@ -57,7 +55,7 @@
                         <div class="card-body">
                             <small class="card-text text-muted" >{{auction.start_time}} </small><br><br>
                             <h5 class="card-title accent-color"><a href="{% url 'auction_detail' auction.pk %}">{{auction.title}}</a></h5>
-                            <h6 class="card-title">Поточна ставка: {{auction.start_price| get_price}} грн</h6>
+                            <h6 class="card-title">Поточна ставка: {{auction.start_price}} грн</h6>
                             <p class="card-text">{{ auction.description| truncatewords:15 }}</p>
                             <a href="{% url 'auction_detail' auction.pk %}" class="btn btn-primary">Зробити ставку</a>
                         </div>
